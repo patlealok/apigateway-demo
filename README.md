@@ -1,11 +1,21 @@
 # apigateway-demo
 AWS apigateway demo project
 
+apigateway routes -
+
+Route - lambda function
+---------------------------
+$connect - websocketConnect
+$disconnect - websocketDisconnect
+websocket-dynamo - websocketdefault
+websocket-message - websocket-message
+$default - websocketdefault
+
 How to use:
 
 You need to connect with websocket URL using wscat.
 
-If you want to trigger specific lambda fuction, you need to pass the parameter in json formate.
+If you want to trigger specific lambda fuction (websocket-dynamo), you need to pass the parameter in json formate.
 
 { "action" : "websocket-dynamo" , "message" : "car" }
 
@@ -31,3 +41,16 @@ Connected (press CTRL+C to quit)
 < "Request completed ! Thanks"
 > { "action" : "websocket-dynamo" , "message" : "tea" }
 < "Request completed ! Thanks"
+
+
+
+Few extra exercise:
+
+When you connect with websocket URL, websocketConnect lamda function will trigger to insert the connection id.
+
+[cloudshell-user@ip-10-0-45-254 ~]$ wscat -c wss://nnyp8jyyp7.execute-api.us-east-1.amazonaws.com/production
+Connected (press CTRL+C to quit)
+[cloudshell-user@ip-10-0-45-254 ~]$ 
+
+when you disconnect the session, websocketDisconnect lamda function will trigger to remove the same connection id.
+
